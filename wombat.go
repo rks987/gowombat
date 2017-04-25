@@ -8,7 +8,14 @@
 package main
 
 import "fmt"
+import "wLex"
+import "wToAst"
+import "wCompile"
 
 func main() {
+	flag.Parse()
+	fromLex   := make(chan wLex.LexToks)
+	wLex.Scan(fromLex, flag.Arg(0), "%")
+	ast :=  wToAst.Build(fromLex)
 	fmt.Printf("Hello, world.\n")
 }
